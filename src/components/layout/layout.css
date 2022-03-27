@@ -1,0 +1,41 @@
+.root {
+  max-width: 768px;
+  min-height: 100vh;
+}
+
+@media (min-width: 769px) {
+  .root {
+    max-width: 1200px;
+    width: 100%;
+  }
+}
+
+.header {
+  height: 10vh;
+}
+
+.main {
+  min-height: 82vh;
+  padding: 0 20px;
+  background-color: rgba(150, 150, 150, 0.1);
+}
+
+.footer {
+  height: 8vh;
+}
+
+.header,
+.main,
+.footer {
+  max-width: 768px;
+  width: 100%;
+}
+
+@media (min-width: 769px) {
+  .header,
+  .main,
+  .footer {
+    max-width: 100%;
+    width: 100%;
+  }
+}

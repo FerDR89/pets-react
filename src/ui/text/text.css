@@ -1,0 +1,23 @@
+.text__title,
+.text__bold,
+.text__body {
+  margin: 3px auto;
+  color: var(--font-colorBlk);
+}
+
+.text__title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  font-family: var(--font-title);
+}
+
+.text__bold {
+  font-size: 1.17rem;
+  font-weight: 600;
+  font-family: var(--font-title);
+}
+
+.text__body {
+  font-size: 1rem;
+  font-family: var(--font-body);
+}
