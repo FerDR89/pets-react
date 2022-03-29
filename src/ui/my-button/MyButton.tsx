@@ -4,12 +4,20 @@ import css from "./myButton.css";
 type ButtonProps = {
   children: any;
   bgc: string;
+  onClicked?: () => any;
 };
 
-export function MyButton({ children, bgc }: ButtonProps) {
+export function MyButton({ children, bgc, onClicked }: ButtonProps) {
   return (
     <div className={css.button__container} style={{ backgroundColor: bgc }}>
-      <button className={css.button}>{children}</button>
+      <button
+        onClick={() => {
+          onClicked();
+        }}
+        className={css.button}
+      >
+        {children}
+      </button>
     </div>
   );
 }

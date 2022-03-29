@@ -13,4 +13,28 @@ function useChangeNavColor() {
   return navOption;
 }
 
-export { useChangeNavColor };
+function useGeoPosition() {
+  const options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0,
+  };
+
+  const error = (error) => {
+    console.error("Error en obtener la geolocalización del usuario");
+  };
+
+  function success(position) {
+    const lng = position.coords.longitude;
+    const lat = position.coords.latitude;
+    console.log(lng, lat);
+  }
+
+  function getCurrentPosition(): any {
+    return navigator.geolocation.getCurrentPosition(success, error, options);
+  }
+
+  getCurrentPosition();
+}
+
+export { useChangeNavColor, useGeoPosition };

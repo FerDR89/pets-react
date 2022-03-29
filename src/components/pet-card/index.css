@@ -1,0 +1,41 @@
+.root {
+  width: 100%;
+  max-width: 335px;
+  height: 250px;
+  background-color: aqua;
+}
+.image__container {
+  width: 100%;
+  height: 150px;
+}
+.image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+.info__container {
+  width: 100%;
+  height: calc(250px - 150px);
+  display: flex;
+  padding: 0px 10px;
+}
+
+.about__container {
+  width: 50%;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.report__container {
+  width: 50%;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.report__link {
+  text-align: right;
+  text-decoration: underline;
+  color: var(--font-link-color);
+}
