@@ -1,17 +1,26 @@
-.root {
+/* .root {
   width: 100%;
   max-width: 335px;
   height: 250px;
-  background-color: aqua;
+  background: linear-gradient(
+    284deg,
+    rgba(198, 244, 6, 0.65) 25%,
+    rgba(253, 187, 45, 1) 100%
+  );
+  border-radius: 5px;
+  box-shadow: 6px 6px 24px #cb9749;
 }
+
 .image__container {
   width: 100%;
   height: 150px;
+  border-radius: 5px 0;
 }
 .image {
   width: 100%;
   height: 150px;
   object-fit: cover;
+  border-radius: 5px 0;
 }
 .info__container {
   width: 100%;
@@ -38,4 +47,5 @@
   text-align: right;
   text-decoration: underline;
   color: var(--font-link-color);
-}
+  cursor: pointer;
+} */

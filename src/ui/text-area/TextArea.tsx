@@ -1,12 +1,12 @@
 import React from "react";
-import css from "ui/text-field/textField.css";
+import css from "ui/text-area/textArea.css";
 type Props = {
   inputType: string;
   labelText: string;
   inputName: string;
 };
 
-export function TextField(props: Props) {
+export function TextArea(props: Props) {
   const { inputType, labelText, inputName } = props;
   return (
     <fieldset className={css["text-field__container"]}>
