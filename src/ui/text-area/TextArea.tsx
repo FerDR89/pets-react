@@ -1,25 +1,27 @@
 import React from "react";
 import css from "ui/text-area/textArea.css";
 type Props = {
-  inputType: string;
   labelText: string;
   inputName: string;
+  fieldSetHeight?: string;
 };
 
 export function TextArea(props: Props) {
-  const { inputType, labelText, inputName } = props;
+  const { labelText, inputName, fieldSetHeight } = props;
   return (
-    <fieldset className={css["text-field__container"]}>
+    <fieldset
+      className={css["text-field__container"]}
+      style={{ height: fieldSetHeight }}
+    >
       <label htmlFor={inputName} className={css["text-field__label"]}>
         {labelText}
       </label>
-      <input
-        type={inputType}
+      <textarea
+        className={css["text-field__input"]}
         name={inputName}
         id={inputName}
-        className={css["text-field__input"]}
-        autoFocus
-      />
+        placeholder={labelText}
+      ></textarea>
     </fieldset>
   );
 }

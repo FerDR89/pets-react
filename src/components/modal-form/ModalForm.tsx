@@ -1,45 +1,52 @@
-// import React from "react";
-// import css from "components/pet-card/petCard.css";
+import React from "react";
+import css from "components/modal-form/modalForm.css";
+import { Text } from "ui/text/Text";
+import { TextArea } from "ui/text-area/TextArea";
+import { TextField } from "ui/text-field/TextField";
+import { MyButton } from "ui/my-button/MyButton";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
-// import { Text } from "ui/text/Text";
+function ModalForm() {
+  const handleSubmit = () => {};
 
-// type PetProps = {
-//   name: string;
-//   image: string;
-//   location: string;
-//   id: number;
-// };
+  return (
+    <article className={css.root}>
+      <FontAwesomeIcon icon={faXmark} className={css.icon} />
+      <div className={css.title__container}>
+        <Text tag="title" fsize="2rem">
+          Reportar info de "insertar nombre"
+        </Text>
+      </div>
+      <form className={css.form}>
+        <TextField
+          inputType="text"
+          inputName="tel"
+          labelText="Tu teléfono"
+          fieldSetHeight="90px"
+        />
 
-// function PetCard({ name, image, id, location }: PetProps) {
-//   const handleClick = () => {
-//     console.log("HOLA");
-//   };
+        <TextField
+          inputType="text"
+          inputName="name"
+          labelText="Tu nombre"
+          fieldSetHeight="90px"
+        />
 
-//   return (
-//     <article className={css.root}>
-//       <div className={css.image__container}>
-//         <img
-//           arial-label={`Imagen de la mascota perdida: ${name}`}
-//           src={image}
-//           alt={`Imagen de la mascota perdida: ${name}`}
-//           className={css.image}
-//         />
-//       </div>
-//       <div className={css.info__container}>
-//         <div className={css.about__container}>
-//           <Text tag="title" fsize="2rem">
-//             {name}
-//           </Text>
-//           <Text tag="text-bold">{location}</Text>
-//         </div>
-//         <div className={css.report__container}>
-//           <a onClick={handleClick} className={css.report__link}>
-//             REPORTAR INFORMACIÓN
-//           </a>
-//         </div>
-//       </div>
-//     </article>
-//   );
-// }
+        <TextArea
+          inputName="tarea"
+          labelText="¿Dónde lo viste?"
+          fieldSetHeight="140px"
+        />
 
-// export { PetCard };
+        <MyButton bgc={"var(--btn-bg1)"}>
+          <Text tag="text-bold" fsize="16px">
+            Enviar
+          </Text>
+        </MyButton>
+      </form>
+    </article>
+  );
+}
+
+export { ModalForm };

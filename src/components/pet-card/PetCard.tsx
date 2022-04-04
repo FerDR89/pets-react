@@ -2,7 +2,6 @@ import React from "react";
 import css from "components/pet-card/petCard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
-import { faSquarePen } from "@fortawesome/free-solid-svg-icons";
 import { Text } from "ui/text/Text";
 
 type PetProps = {
@@ -14,10 +13,9 @@ type PetProps = {
 };
 
 function PetCard({ name, image, id, location, edit }: PetProps) {
-  const handleClick = () => {
+  function handleClick() {
     console.log("HOLA");
-  };
-
+  }
   function ReportPetComp() {
     return (
       <a
