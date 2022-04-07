@@ -23,6 +23,7 @@ function ModalForm() {
           inputType="text"
           inputName="tel"
           labelText="Tu teléfono"
+          holder="Ingresá aquí tu teléfono"
           fieldSetHeight="90px"
         />
 
@@ -30,6 +31,7 @@ function ModalForm() {
           inputType="text"
           inputName="name"
           labelText="Tu nombre"
+          holder="Ingresá aquí tu nombre"
           fieldSetHeight="90px"
         />
 

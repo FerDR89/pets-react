@@ -11,6 +11,7 @@ function EmailForm() {
         inputType="email"
         inputName="email"
         labelText="Email"
+        holder="Ingresá aquí tu email"
         fieldSetHeight="90px"
       />
       <MyButton bgc={"var(--btn-bg1)"}>

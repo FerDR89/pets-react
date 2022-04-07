@@ -1,10 +1,6 @@
-import React from "react";
-import { EmailForm } from "components/loggin-form/emailForm";
+import React, { useCallback, useEffect, useState } from "react";
+import { Dropzone } from "components/dropzone/Dropzone";
 
-export function Test() {
-  return (
-    <div>
-      <EmailForm />
-    </div>
-  );
+export function Test(props) {
+  return <Dropzone />;
 }

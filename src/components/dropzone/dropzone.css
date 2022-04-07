@@ -1,0 +1,28 @@
+
+.root{
+    width: 100%;
+    max-width: 335px;
+    height: calc(142px + 18px + 50px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+.image__container{
+    width: 100%;
+    height: 142px;
+    border-radius:5px;
+    border: 1px dashed black;
+    overflow:hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.img{
+    width:100%;
+    height:142px;
+    object-fit: cover;
+    object-position: top;
+}

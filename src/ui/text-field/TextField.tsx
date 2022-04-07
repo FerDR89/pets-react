@@ -5,10 +5,11 @@ type Props = {
   labelText: string;
   inputName: string;
   fieldSetHeight?: string;
+  holder?: string;
 };
 
 export function TextField(props: Props) {
-  const { inputType, labelText, inputName, fieldSetHeight } = props;
+  const { inputType, labelText, inputName, fieldSetHeight, holder } = props;
   return (
     <fieldset
       className={css["text-field__container"]}
@@ -22,7 +23,7 @@ export function TextField(props: Props) {
         name={inputName}
         id={inputName}
         className={css["text-field__input"]}
-        placeholder={labelText}
+        placeholder={holder}
       />
     </fieldset>
   );

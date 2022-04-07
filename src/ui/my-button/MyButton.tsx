@@ -4,7 +4,7 @@ import css from "./myButton.css";
 type ButtonProps = {
   children: any;
   bgc: string;
-  onClicked?: () => any;
+  onClicked?: (any?) => any;
 };
 
 export function MyButton({ children, bgc, onClicked }: ButtonProps) {
