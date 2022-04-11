@@ -27,6 +27,7 @@
   .title__container{
     width: 100%;
     height: 60px;
+    margin-bottom: 15px;
   }
 }
 
@@ -42,7 +43,7 @@
 
 @media (min-width: 769px) {
   .cards__container {
-    min-height: calc(82vh - 20px - 20px - 60px);
+    min-height: calc(82vh - 20px - 20px - 60px - 15px);
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(335px, 1fr));
     justify-items: center;

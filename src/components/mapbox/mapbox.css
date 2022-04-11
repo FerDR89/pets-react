@@ -1,0 +1,35 @@
+.root{ 
+width: 100%;
+max-width: 335px;
+height: calc(210px + 20px + 24px + 50px + 18px + 77px + 50px );
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: space-evenly;
+}
+
+.map {
+    width: 100%;
+    height: 210px;
+    overflow: hidden;
+    }
+
+.search{
+width: 100%;
+max-width: 335px;
+border: none;
+margin: 0;
+padding: 0;
+display: flex;
+flex-direction: column;}
+.label{
+    margin-bottom: 5px;
+}
+.input{
+    width: 100%;
+    height: 45px;
+    border: none;
+    border-radius: 5px;
+    padding: 7px;
+}
+.text__container{}

@@ -6,16 +6,23 @@ type TextProps = {
   children: any;
   fsize?: string;
   textAlign?: any;
+  whiteSpace?: any;
 };
 
-function Text({ tag, children, fsize, textAlign }: TextProps) {
+function Text({ tag, children, fsize, textAlign, whiteSpace }: TextProps) {
   const tags =
     tag === "title" ? (
-      <h1 className={css.text__title} style={{ fontSize: fsize }}>
+      <h1
+        className={css.text__title}
+        style={{ fontSize: fsize, whiteSpace: whiteSpace }}
+      >
         {children}
       </h1>
     ) : tag === "text-bold" ? (
-      <h3 className={css.text__bold} style={{ fontSize: fsize }}>
+      <h3
+        className={css.text__bold}
+        style={{ fontSize: fsize, whiteSpace: whiteSpace }}
+      >
         {children}
       </h3>
     ) : (

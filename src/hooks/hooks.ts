@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { guessCoords, getPetsAround } from "hooks/atom";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 function useChangeNavColor() {
   const [navOption, setNavOption] = useState(false);
@@ -13,28 +15,12 @@ function useChangeNavColor() {
   return navOption;
 }
 
-function useGeoPosition() {
-  const options = {
-    enableHighAccuracy: true,
-    timeout: 5000,
-    maximumAge: 0,
-  };
-
-  const error = (error) => {
-    console.error("Error en obtener la geolocalización del usuario");
-  };
-
-  function success(position) {
-    const lng = position.coords.longitude;
-    const lat = position.coords.latitude;
-    console.log(lng, lat);
-  }
-
-  function getCurrentPosition(): any {
-    return navigator.geolocation.getCurrentPosition(success, error, options);
-  }
-
-  getCurrentPosition();
+function useSetGuessCords() {
+  return useRecoilState(guessCoords);
 }
 
-export { useChangeNavColor, useGeoPosition };
+function usePetsArounds() {
+  return useRecoilValue(getPetsAround);
+}
+
+export { useChangeNavColor, useSetGuessCords, usePetsArounds };

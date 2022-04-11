@@ -8,7 +8,7 @@ const MyPets = () => {
   return (
     <article className={css.root}>
       <div className={css.title__container}>
-        <Text tag="title"> Mascotas perdidas cerca tuyo</Text>
+        <Text tag="title"> Mis mascotas reportadas</Text>
       </div>
       <div className={css.cards__container}>
         <PetCard

@@ -59,10 +59,12 @@ function PetCard({ name, image, id, location, edit }: PetProps) {
       </div>
       <div className={css.info__container}>
         <div className={css.about__container}>
-          <Text tag="title" fsize="2rem">
+          <Text tag="title" fsize="2rem" whiteSpace={"nowrap"}>
             {name}
           </Text>
-          <Text tag="text-bold">{location}</Text>
+          <Text tag="text-bold" whiteSpace={"nowrap"}>
+            {location}
+          </Text>
         </div>
         <div className={css.report__container}>
           {edit ? <EditPetComp /> : <ReportPetComp />}

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { MyButton } from "ui/my-button/MyButton";
 import { Text } from "ui/text/Text";

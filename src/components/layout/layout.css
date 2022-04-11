@@ -29,6 +29,9 @@
 .footer {
   max-width: 768px;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 @media (min-width: 769px) {
@@ -37,5 +40,6 @@
   .footer {
     max-width: 100%;
     width: 100%;
+   
   }
 }

@@ -1,16 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import css from "pages/home/index.css";
 import { useNavigate } from "react-router-dom";
-import { useGeoPosition } from "hooks/hooks";
+import { useSetGuessCords } from "hooks/hooks";
 import { Text } from "ui/text/Text";
 import { MyButton } from "ui/my-button/MyButton";
 
 const Home = () => {
   const navigate = useNavigate();
+  const [coords, setNewCoords] = useSetGuessCords();
+
   const handleClick = () => {
-    useGeoPosition();
+    navigator.geolocation.getCurrentPosition((position) => {
+      const lng = position.coords.longitude;
+      const lat = position.coords.latitude;
+      setNewCoords({ lat, lng });
+    });
     navigate("/pets-around");
   };
+
   return (
     <article className={css.root}>
       <Text tag="title" fsize="40px">

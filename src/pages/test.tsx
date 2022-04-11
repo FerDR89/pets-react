@@ -1,6 +1,3 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { Dropzone } from "components/dropzone/Dropzone";
+import React, { useState } from "react";
 
-export function Test(props) {
-  return <Dropzone />;
-}
+export function Test(props) {}
