@@ -25,7 +25,7 @@ function DataForm() {
 
       <TextField
         inputType="password"
-        inputName="password"
+        inputName="newPassword"
         labelText="Repetir contraseña"
         fieldSetHeight="90px"
       />

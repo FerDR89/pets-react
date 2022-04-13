@@ -21,7 +21,7 @@ const MyRoutes = () => {
         <Route path="my-dates" element={<MyDates />} />
         <Route path="my-pets" element={<MyPets />} />
         <Route path="reported-pets" element={<ReportedPets />} />
-        <Route path="/test" element={<Test />} />
+        {/* <Route path="/test" element={<Test />} /> */}
       </Route>
     </Routes>
   );

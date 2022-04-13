@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useChangeNavColor } from "hooks/hooks";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import css from "components/burger-menu/burgerMenu.css";
 import { Text } from "ui/text/Text";
 import logo from "assets/pet-icon.png";
@@ -8,13 +8,18 @@ import logo from "assets/pet-icon.png";
 function BurgerMenu() {
   const [status, setStatus] = useState("hamburger__close");
   const [showModal, setShowModal] = useState("hidden__modal");
+  const navigate = useNavigate();
 
-  function handleClick() {
+  function handleMenuClick() {
     //Forma resumida de esto status == "open" ? setStatus("close") : setStatus("open")
     setStatus(
       status == "hamburger__close" ? "hamburger__open" : "hamburger__close"
     );
     setShowModal(showModal == "show__modal" ? "hidden__modal" : "show__modal");
+  }
+
+  function handleLinkClick(route: string) {
+    navigate(route);
   }
 
   const navOption = useChangeNavColor();
@@ -36,7 +41,7 @@ function BurgerMenu() {
         <div
           className={css[status]}
           onClick={() => {
-            handleClick();
+            handleMenuClick();
           }}
         ></div>
         <div className={css[showModal]}>
@@ -46,7 +51,8 @@ function BurgerMenu() {
                 aria-label="COMPLETAR"
                 className={css.link}
                 onClick={() => {
-                  handleClick();
+                  handleMenuClick();
+                  handleLinkClick("my-dates");
                 }}
               >
                 <Text tag="text-bold" fsize="1.5rem">
@@ -59,7 +65,8 @@ function BurgerMenu() {
                 aria-label="COMPLETAR"
                 className={css.link}
                 onClick={() => {
-                  handleClick();
+                  handleMenuClick();
+                  handleLinkClick("my-pets");
                 }}
               >
                 <Text tag="text-bold" fsize="1.5rem">
@@ -72,7 +79,8 @@ function BurgerMenu() {
                 aria-label="COMPLETAR"
                 className={css.link}
                 onClick={() => {
-                  handleClick();
+                  handleMenuClick();
+                  handleLinkClick("reported-pets");
                 }}
               >
                 <Text tag="text-bold" fsize="1.5rem">

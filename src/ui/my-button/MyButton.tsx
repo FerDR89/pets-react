@@ -10,12 +10,7 @@ type ButtonProps = {
 export function MyButton({ children, bgc, onClicked }: ButtonProps) {
   return (
     <div className={css.button__container} style={{ backgroundColor: bgc }}>
-      <button
-        onClick={() => {
-          onClicked();
-        }}
-        className={css.button}
-      >
+      <button onClick={onClicked} className={css.button}>
         {children}
       </button>
     </div>

@@ -1,12 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import css from "components/loggin-form/index.css";
 import { Text } from "ui/text/Text";
 import { TextField } from "ui/text-field/TextField";
 import { MyButton } from "ui/my-button/MyButton";
+import { useSetUser } from "hooks/hooks";
+import { fetchuserId } from "lib/api";
+import { useNavigate } from "react-router-dom";
 
 function EmailForm() {
+  const navigate = useNavigate();
+  const [user, setUser] = useSetUser();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    if (email) {
+      const data = await fetchuserId(email);
+      setUser({ ...user, userEmail: email, userName: data.userName });
+      data.user_id ? navigate("/auth") : navigate("/my-dates");
+    }
+  };
+
+  console.log({ user });
+
   return (
-    <form className={css.form}>
+    <form onSubmit={handleSubmit} className={css.form}>
       <TextField
         inputType="email"
         inputName="email"

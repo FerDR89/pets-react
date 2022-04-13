@@ -13,9 +13,7 @@ export function ReportedPets() {
   }
   return (
     <article className={css.root}>
-      <div className={css.title__container}>
-        <Text tag="title">Reportar mascota perdida</Text>
-      </div>
+      <Text tag="title">Reportar mascota perdida</Text>
       <ReportForm />
       <MyButton onClicked={handleCancelClick} bgc={"var(--btn-bg3)"}>
         <Text tag="text-bold" fsize="16px">
