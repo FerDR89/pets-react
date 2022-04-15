@@ -12,7 +12,7 @@ async function fetchPetsAround(coords) {
   }
 }
 
-async function fetchuserId(email: string) {
+async function fetchUserId(email: string) {
   try {
     const res = await fetch(API_BASE_URL + "/signin", {
       method: "POST",
@@ -27,5 +27,65 @@ async function fetchuserId(email: string) {
     console.log(error);
   }
 }
+async function fetchUserToken(email: string, password) {
+  try {
+    const res = await fetch(API_BASE_URL + "/auth/token", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
+    const result = await res.json();
+    return result.token;
+  } catch (error) {
+    console.log(error);
+  }
+}
 
-export { fetchPetsAround, fetchuserId };
+async function fetchSetUserData(password, fullname, email) {
+  const userData = {
+    fullname,
+    email,
+    password,
+  };
+
+  console.log({ userData });
+
+  fetch(API_BASE_URL + "/auth", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userData),
+  });
+}
+
+async function fetchUpdateUserData(token, password?, fullname?) {
+  const userData = {
+    fullname,
+    password,
+  };
+
+  console.log({ token });
+  console.log({ userData });
+
+  const response = await fetch(API_BASE_URL + "/my-profile", {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "bearer " + token,
+    },
+    body: JSON.stringify(userData),
+  });
+  const result = await response.json();
+  return result;
+}
+
+export {
+  fetchPetsAround,
+  fetchUserId,
+  fetchUserToken,
+  fetchSetUserData,
+  fetchUpdateUserData,
+};

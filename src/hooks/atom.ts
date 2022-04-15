@@ -1,5 +1,5 @@
 import { atom, selector } from "recoil";
-import { fetchPetsAround, fetchuserId } from "lib/api";
+import { fetchPetsAround } from "lib/api";
 
 export const guessCoords = atom({
   key: "guessCords",

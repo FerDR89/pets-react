@@ -1,7 +1,7 @@
 import React from "react";
 import css from "pages/login/index.css";
 import { Text } from "ui/text/Text";
-import { PassForm } from "components/loggin-form/passForm";
+import { PassForm } from "components/loggin-form/PassForm";
 
 const Auth = () => {
   return (

@@ -5,7 +5,7 @@ import { Home } from "pages/home/index";
 import { PetsAround } from "pages/pets-around/index";
 import { Login } from "pages/login/login";
 import { Auth } from "pages/login/auth";
-import { MyDates } from "pages/my-dates/myDates";
+import { MyDates } from "pages/my-dates/index";
 import { MyPets } from "pages/my-pets";
 import { Test } from "pages/test";
 import { ReportedPets } from "pages/reported-pets";

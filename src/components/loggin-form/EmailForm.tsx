@@ -4,7 +4,7 @@ import { Text } from "ui/text/Text";
 import { TextField } from "ui/text-field/TextField";
 import { MyButton } from "ui/my-button/MyButton";
 import { useSetUser } from "hooks/hooks";
-import { fetchuserId } from "lib/api";
+import { fetchUserId } from "lib/api";
 import { useNavigate } from "react-router-dom";
 
 function EmailForm() {
@@ -15,13 +15,13 @@ function EmailForm() {
     e.preventDefault();
     const email = e.target.email.value;
     if (email) {
-      const data = await fetchuserId(email);
+      const data = await fetchUserId(email);
+      console.log({ data });
+
       setUser({ ...user, userEmail: email, userName: data.userName });
       data.user_id ? navigate("/auth") : navigate("/my-dates");
     }
   };
-
-  console.log({ user });
 
   return (
     <form onSubmit={handleSubmit} className={css.form}>

@@ -1,7 +1,7 @@
 import React from "react";
 import css from "pages/login/index.css";
 import { Text } from "ui/text/Text";
-import { EmailForm } from "components/loggin-form/emailForm";
+import { EmailForm } from "components/loggin-form/EmailForm";
 
 const Login = () => {
   return (

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useChangeNavColor } from "hooks/hooks";
 import { Link, useNavigate } from "react-router-dom";
+import { useSetUser } from "hooks/hooks";
 import css from "components/burger-menu/burgerMenu.css";
 import { Text } from "ui/text/Text";
 import logo from "assets/pet-icon.png";
@@ -8,6 +9,9 @@ import logo from "assets/pet-icon.png";
 function BurgerMenu() {
   const [status, setStatus] = useState("hamburger__close");
   const [showModal, setShowModal] = useState("hidden__modal");
+  const [user, setUser] = useSetUser();
+  const token = user["token"];
+  const userEmail = user["userEmail"];
   const navigate = useNavigate();
 
   function handleMenuClick() {
@@ -18,9 +22,21 @@ function BurgerMenu() {
     setShowModal(showModal == "show__modal" ? "hidden__modal" : "show__modal");
   }
 
-  function handleLinkClick(route: string) {
-    navigate(route);
+  function handleLinkClick(path: string) {
+    if (token) {
+      navigate(path);
+    } else {
+      setUser({ ...user, path });
+      navigate("login");
+    }
   }
+
+  function handleCloseSesionClick() {
+    setUser({});
+    navigate("/");
+  }
+
+  console.log({ user });
 
   const navOption = useChangeNavColor();
 
@@ -38,21 +54,16 @@ function BurgerMenu() {
             className={css.logo}
           />
         </Link>
-        <div
-          className={css[status]}
-          onClick={() => {
-            handleMenuClick();
-          }}
-        ></div>
+        <div className={css[status]} onClick={handleMenuClick}></div>
         <div className={css[showModal]}>
           <ul className={css.list}>
             <li className={css.item}>
               <a
-                aria-label="COMPLETAR"
+                aria-label="Link to my dates page"
                 className={css.link}
                 onClick={() => {
                   handleMenuClick();
-                  handleLinkClick("my-dates");
+                  handleLinkClick("/my-dates");
                 }}
               >
                 <Text tag="text-bold" fsize="1.5rem">
@@ -62,11 +73,11 @@ function BurgerMenu() {
             </li>
             <li className={css.item}>
               <a
-                aria-label="COMPLETAR"
+                aria-label="Link to my pets page"
                 className={css.link}
                 onClick={() => {
                   handleMenuClick();
-                  handleLinkClick("my-pets");
+                  handleLinkClick("/my-pets");
                 }}
               >
                 <Text tag="text-bold" fsize="1.5rem">
@@ -76,11 +87,11 @@ function BurgerMenu() {
             </li>
             <li className={css.item}>
               <a
-                aria-label="COMPLETAR"
+                aria-label="Link to reported pets page"
                 className={css.link}
                 onClick={() => {
                   handleMenuClick();
-                  handleLinkClick("reported-pets");
+                  handleLinkClick("/reported-pets");
                 }}
               >
                 <Text tag="text-bold" fsize="1.5rem">
@@ -91,9 +102,16 @@ function BurgerMenu() {
           </ul>
           <div className={css["close-session__container"]}>
             <Text tag="text-body" fsize="18px">
-              Fernando@hotmail.com
+              {userEmail || ""}
             </Text>
-            <a className={css.close__link} aria-label="Cerrar sesión">
+            <a
+              aria-label="Cerrar sesión"
+              className={css.close__link}
+              onClick={() => {
+                handleMenuClick();
+                handleCloseSesionClick();
+              }}
+            >
               CERRAR SESIÓN
             </a>
           </div>
