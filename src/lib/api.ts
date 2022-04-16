@@ -27,7 +27,8 @@ async function fetchUserId(email: string) {
     console.log(error);
   }
 }
-async function fetchUserToken(email: string, password) {
+
+async function fetchUserToken(email: string, password: string) {
   try {
     const res = await fetch(API_BASE_URL + "/auth/token", {
       method: "POST",
@@ -61,15 +62,10 @@ async function fetchSetUserData(password, fullname, email) {
   });
 }
 
-async function fetchUpdateUserData(token, password?, fullname?) {
-  const userData = {
-    fullname,
-    password,
-  };
-
-  console.log({ token });
-  console.log({ userData });
-
+async function fetchUpdateUserData(
+  token,
+  userData: { fullname?: string; password?: string }
+) {
   const response = await fetch(API_BASE_URL + "/my-profile", {
     method: "PATCH",
     headers: {
@@ -82,10 +78,22 @@ async function fetchUpdateUserData(token, password?, fullname?) {
   return result;
 }
 
+async function fetchMyPets(token) {
+  const response = await fetch(API_BASE_URL + "/get-my-pets", {
+    method: "GET",
+    headers: {
+      Authorization: "bearer " + token,
+    },
+  });
+  const result = await response.json();
+  return result;
+}
+
 export {
   fetchPetsAround,
   fetchUserId,
   fetchUserToken,
   fetchSetUserData,
   fetchUpdateUserData,
+  fetchMyPets,
 };

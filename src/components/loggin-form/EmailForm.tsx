@@ -17,8 +17,11 @@ function EmailForm() {
     if (email) {
       const data = await fetchUserId(email);
       console.log({ data });
-
-      setUser({ ...user, userEmail: email, userName: data.userName });
+      setUser({
+        ...user,
+        userEmail: email,
+        userName: data.userName,
+      });
       data.user_id ? navigate("/auth") : navigate("/my-dates");
     }
   };

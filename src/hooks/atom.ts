@@ -1,5 +1,5 @@
 import { atom, selector } from "recoil";
-import { fetchPetsAround } from "lib/api";
+import { fetchPetsAround, fetchMyPets } from "lib/api";
 
 export const guessCoords = atom({
   key: "guessCords",
@@ -17,7 +17,19 @@ export const getPetsAround = selector({
   },
 });
 
-export const user = atom({
+export const userState = atom({
   key: "user",
   default: {},
+});
+
+export const getMyPets = selector({
+  key: "getMyPets",
+  get: async ({ get }) => {
+    const user = await get(userState);
+    const token = user["token"];
+    if (token) {
+      const arrayPets = await fetchMyPets(token);
+      return arrayPets;
+    }
+  },
 });

@@ -19,7 +19,7 @@ function PassForm() {
     if (password) {
       const token = await fetchUserToken(email, password);
       setUser({ ...user, token });
-      token ? navigate(path) : <div>Contraseña incorrecta</div>;
+      token ? navigate(path) : alert("Contraseña incorrecta");
     }
   };
 

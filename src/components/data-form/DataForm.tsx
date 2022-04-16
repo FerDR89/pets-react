@@ -31,44 +31,47 @@ function DataForm() {
     const userName = e.target.name.value;
     const password = e.target.password.value;
     const repeatPassword = e.target.repeatPassword.value;
-
-    //CHEQUEAR CUANDO CAMBIO EL NOMBRE LOS ARGUMENTOS OPCIONALES PORQUE ME TOMA SIEMPRE COMO PRIMER ARGUMENTO LA PASSWORD
+    const userData = { fullname: userName };
 
     if (password && repeatPassword) {
       const validPass = checkPassword(password, repeatPassword);
+      userData["password"] = validPass.toString();
 
       if (!token) {
         if (validPass) {
-          fetchSetUserData(validPass, userName, userEmail);
-          navigate("/login");
+          fetchSetUserData(validPass, userName, userEmail).then((res) => {
+            setUser({ ...user, user_id: res["user_id"] });
+            res["newUserId"]
+              ? alert("Su usuario a sido creado con éxito")
+              : alert(res["message"]);
+            navigate("/login");
+          });
         }
       } else {
         if (validPass) {
-          fetchUpdateUserData(token, validPass).then((res) => {
-            console.log(res);
+          fetchUpdateUserData(token, userData).then((res) => {
+            if (res["updateUser"] == true && res["updateAuth"] == true) {
+              alert(
+                "Su nombre de usuario y contraseña fueron actualizados con éxito"
+              );
+            } else if (res["updateAuth"] == true) {
+              alert("Su contraseña ha sido actualizada con éxito ");
+            } else {
+              alert("Error, intentelo nuevamente más tarde");
+            }
           });
         }
       }
     } else {
-      fetchUpdateUserData(token, userName).then((res) => {
-        console.log(res);
+      fetchUpdateUserData(token, userData).then((res) => {
+        if (res["updateUser"] == true) {
+          alert("Su nombre de usuario fue actualizado con éxito");
+        } else {
+          alert("Error, intentelo nuevamente más tarde");
+        }
       });
     }
   }
-
-  //     // } else {
-  //     //   });
-
-  //     // if (result["updateUser"] == true || result["updateAuth"] == true) {
-  //     //   alert("Sus datos han sido actualizados correctamente");
-  //     // } else {
-  //     //   alert(
-  //     //     "Hubo un problema con la carga de sus datos, por favor intente luego"
-  //     //   );
-  //     // }
-  //   }
-  // }
-  // }
 
   return (
     <form onSubmit={handleSubmit} className={css.form}>
