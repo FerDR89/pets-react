@@ -33,3 +33,8 @@ export const getMyPets = selector({
     }
   },
 });
+
+export const petState = atom({
+  key: "pet",
+  default: {},
+});

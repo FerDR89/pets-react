@@ -6,10 +6,14 @@ import { Dropzone } from "components/dropzone/Dropzone";
 import { Mapbox } from "components/mapbox/Mapbox";
 import { MyButton } from "ui/my-button/MyButton";
 
-export function ReportForm() {
+type ReportFormProps = {
+  petName?: string;
+};
+
+export function ReportForm({ petName }: ReportFormProps) {
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target.name.value);
+    console.log("value", e.target.name.value);
   };
   return (
     <form className={css.form} onSubmit={handleSubmit}>
@@ -17,11 +21,11 @@ export function ReportForm() {
         inputType="text"
         inputName="name"
         labelText="Nombre"
-        holder="Ingresá el nombre de tu mascota aquí"
+        holder={petName || "Ingresá el nombre de tu mascota aquí"}
       />
       <Dropzone />
       <Mapbox />
-      <MyButton onClicked={() => {}} bgc={"var(--btn-bg1)"}>
+      <MyButton bgc={"var(--btn-bg1)"}>
         <Text tag="text-bold" fsize="16px">
           Reportar como perdido
         </Text>

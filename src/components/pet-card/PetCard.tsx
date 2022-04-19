@@ -3,23 +3,37 @@ import css from "components/pet-card/petCard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
 import { Text } from "ui/text/Text";
+import { useSetPet } from "hooks/hooks";
+import { useNavigate } from "react-router-dom";
 
 type PetProps = {
   name: string;
   image: string;
   location: string;
   id: number;
-  edit?: boolean;
+  userId?: number;
 };
 
-function PetCard({ name, image, id, location, edit }: PetProps) {
+function PetCard({ name, image, id, location, userId }: PetProps) {
+  const navigate = useNavigate();
+  const [pet, setPet] = useSetPet();
+
   function handleClick() {
-    console.log("HOLA");
+    setPet({
+      ...pet,
+      petName: name,
+      petImgURL: image,
+      petId: id,
+      petLocation: location,
+      userId,
+    });
+    navigate("/reported-pets");
   }
+
   function ReportPetComp() {
     return (
       <a
-        onClick={handleClick}
+        // onClick={}
         className={css.report__link}
         aria-label="Botón para reportar una mascota perdida"
       >
@@ -67,7 +81,7 @@ function PetCard({ name, image, id, location, edit }: PetProps) {
           </Text>
         </div>
         <div className={css.report__container}>
-          {edit ? <EditPetComp /> : <ReportPetComp />}
+          {userId ? <EditPetComp /> : <ReportPetComp />}
         </div>
       </div>
     </article>

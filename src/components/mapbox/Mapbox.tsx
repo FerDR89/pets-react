@@ -12,10 +12,11 @@ const Map = ReactMapboxGl({
 
 type MapBoxSearchProps = {
   onChange?: (any) => any;
+  queryProp?: string;
 };
 
 export function Mapbox(props: MapBoxSearchProps) {
-  const { onChange } = props;
+  const { onChange, queryProp } = props;
   const [query, setQuery] = useState("");
   // lo seteo any porque la prop "center" de Map se queja
   const initialCoords: any = [-0.481747846041145, 51.3233379650232];

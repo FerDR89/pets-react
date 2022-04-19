@@ -3,12 +3,9 @@ import css from "pages/pets-around/index.css";
 import { useMyPets } from "hooks/hooks";
 import { PetCard } from "components/pet-card/PetCard";
 import { Text } from "ui/text/Text";
-import pet from "assets/mockPet.jpg";
 
 const MyPets = () => {
   const arrayPets = useMyPets();
-  console.log({ arrayPets });
-
   return (
     <article className={css.root}>
       <div className={css.title__container}>
@@ -24,7 +21,7 @@ const MyPets = () => {
                 id={pet.id}
                 image={pet.imgURL}
                 location={pet.place_lost}
-                edit={true}
+                userId={pet.userId}
               />
             );
           })

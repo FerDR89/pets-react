@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import { useChangeNavColor } from "hooks/hooks";
 import { Link, useNavigate } from "react-router-dom";
-import { useSetUser } from "hooks/hooks";
+import { useSetUser, useSetPet } from "hooks/hooks";
 import css from "components/burger-menu/burgerMenu.css";
 import { Text } from "ui/text/Text";
 import logo from "assets/pet-icon.png";
 
 function BurgerMenu() {
+  const navigate = useNavigate();
   const [status, setStatus] = useState("hamburger__close");
   const [showModal, setShowModal] = useState("hidden__modal");
   const [user, setUser] = useSetUser();
   const token = user["token"];
   const userEmail = user["userEmail"];
-  const navigate = useNavigate();
+  const [pet, setPet] = useSetPet();
 
   function handleMenuClick() {
     //Forma resumida de esto status == "open" ? setStatus("close") : setStatus("open")
@@ -36,7 +37,11 @@ function BurgerMenu() {
     navigate("/");
   }
 
-  console.log({ user });
+  function handleResetPetStateClick() {
+    setPet({
+      userId: null,
+    });
+  }
 
   const navOption = useChangeNavColor();
 
@@ -92,6 +97,7 @@ function BurgerMenu() {
                 onClick={() => {
                   handleMenuClick();
                   handleLinkClick("/reported-pets");
+                  handleResetPetStateClick();
                 }}
               >
                 <Text tag="text-bold" fsize="1.5rem">

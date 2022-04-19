@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
+import { useSetPet } from "hooks/hooks";
 import { MyButton } from "ui/my-button/MyButton";
 import { Text } from "ui/text/Text";
 import css from "components/dropzone/dropzone.css";
 
-export function Dropzone(props) {
+export function Dropzone() {
+  const [pet, setPet] = useSetPet();
+  const petImg = pet["petImgURL"];
   const [newImg, setNewImg] = useState(null);
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
@@ -14,6 +17,8 @@ export function Dropzone(props) {
       const reader = new FileReader();
       reader.onload = (event) => {
         setNewImg(event.target.result);
+        const slicedString = event.target.result.slice(27);
+        setPet({ ...pet, petImg64: slicedString });
       };
       reader.readAsDataURL(acceptedFiles[0]);
     },
@@ -24,6 +29,8 @@ export function Dropzone(props) {
       <div className={css.image__container} {...getRootProps()}>
         {newImg ? (
           <img className={css.img} src={newImg} />
+        ) : petImg ? (
+          <img className={css.img} src={petImg} />
         ) : (
           <Text tag="text-bold" fsize="16px">
             Arrastra la foto de tu mascota aquí
@@ -32,7 +39,7 @@ export function Dropzone(props) {
         <input {...getInputProps()} />
       </div>
 
-      <MyButton onClicked={() => {}} bgc={"var(--btn-bg2)"}>
+      <MyButton bgc={"var(--btn-bg2)"}>
         <div {...getRootProps()}>
           <Text tag="text-bold" fsize="16px">
             agregar/modificar foto

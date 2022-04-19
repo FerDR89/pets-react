@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { guessCoords, getPetsAround, userState, getMyPets } from "hooks/atom";
+import {
+  guessCoords,
+  getPetsAround,
+  userState,
+  getMyPets,
+  petState,
+} from "hooks/atom";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 function useChangeNavColor() {
@@ -31,10 +37,20 @@ function useMyPets() {
   return useRecoilValue(getMyPets);
 }
 
+function useSetPet() {
+  return useRecoilState(petState);
+}
+
+function usePet() {
+  return useRecoilValue(petState);
+}
+
 export {
   useChangeNavColor,
   useSetGuessCords,
   usePetsArounds,
   useSetUser,
   useMyPets,
+  useSetPet,
+  usePet,
 };
