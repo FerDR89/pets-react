@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ReactMapboxGl, { Layer, Feature } from "react-mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import css from "components/mapbox/mapbox.css";
+import { useSetPet } from "hooks/hooks";
 import { MyButton } from "ui/my-button/MyButton";
 import { Text } from "ui/text/Text";
 
@@ -10,13 +11,13 @@ const Map = ReactMapboxGl({
     "pk.eyJ1IjoiZmVyZHI4OWRldiIsImEiOiJja3l1ZXZqOXgxbmY5MnVsdWpqbmVrZXNiIn0.suMetmzHmx4QIFU4i5-xXg",
 });
 
-type MapBoxSearchProps = {
-  onChange?: (any) => any;
-  queryProp?: string;
-};
+// type MapBoxSearchProps = {
+//   onChange?: (any) => any;
+// };
+// export function Mapbox({onChange} MapBoxSearchProps) {
 
-export function Mapbox(props: MapBoxSearchProps) {
-  const { onChange, queryProp } = props;
+export function Mapbox() {
+  const [pet, setPet] = useSetPet();
   const [query, setQuery] = useState("");
   // lo seteo any porque la prop "center" de Map se queja
   const initialCoords: any = [-0.481747846041145, 51.3233379650232];
@@ -29,17 +30,18 @@ export function Mapbox(props: MapBoxSearchProps) {
     ).then((r) => r.json());
     console.log(data);
     const lat = parseFloat(data[0].lat);
-    const lon = parseFloat(data[0].lon);
-    const newCoords = [lon, lat];
+    const lng = parseFloat(data[0].lon);
+    const newCoords = [lng, lat];
     setCoords(newCoords);
+    setPet({ ...pet, petCoords: newCoords, place_lost: query });
 
-    // lo "tiro" hacia arriba para que reciban las coordenadas desde "afuera"
-    if (onChange) {
-      onChange({
-        query: query,
-        coords: newCoords,
-      });
-    }
+    // // lo "tiro" hacia arriba para que reciban las coordenadas desde "afuera"
+    // if (onChange) {
+    //   onChange({
+    //     query: query,
+    //     coords: newCoords,
+    //   });
+    // }
   }
 
   function inputChangeHandler(e) {
@@ -80,7 +82,8 @@ export function Mapbox(props: MapBoxSearchProps) {
           className={css.input}
         />
       </fieldset>
-      <MyButton onClicked={search} bgc={"var(--btn-bg2)"}>
+      {/* <MyButton onClicked={search} bgc={"var(--btn-bg2)"} */}
+      <MyButton onClicked={search} bgc={"var(--btn-bg2)"} type={"button"}>
         <Text tag="text-bold" fsize="16px">
           Buscar
         </Text>

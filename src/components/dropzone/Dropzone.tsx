@@ -17,8 +17,7 @@ export function Dropzone() {
       const reader = new FileReader();
       reader.onload = (event) => {
         setNewImg(event.target.result);
-        const slicedString = event.target.result.slice(27);
-        setPet({ ...pet, petImg64: slicedString });
+        setPet({ ...pet, petImg64: event.target.result });
       };
       reader.readAsDataURL(acceptedFiles[0]);
     },
@@ -36,10 +35,11 @@ export function Dropzone() {
             Arrastra la foto de tu mascota aquí
           </Text>
         )}
-        <input {...getInputProps()} />
+        <input {...getInputProps()} onChange={() => {}} />
       </div>
 
-      <MyButton bgc={"var(--btn-bg2)"}>
+      {/* <MyButton bgc={"var(--btn-bg2)"} > */}
+      <MyButton bgc={"var(--btn-bg2)"} type={"button"}>
         <div {...getRootProps()}>
           <Text tag="text-bold" fsize="16px">
             agregar/modificar foto

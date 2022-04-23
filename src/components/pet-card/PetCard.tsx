@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import css from "components/pet-card/petCard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
 import { Text } from "ui/text/Text";
 import { useSetPet } from "hooks/hooks";
 import { useNavigate } from "react-router-dom";
+import { ModalForm } from "components/modal-form/ModalForm";
 
 type PetProps = {
   name: string;
@@ -17,6 +18,7 @@ type PetProps = {
 function PetCard({ name, image, id, location, userId }: PetProps) {
   const navigate = useNavigate();
   const [pet, setPet] = useSetPet();
+  const [showModal, setShowModal] = useState(false);
 
   function handleClick() {
     setPet({
@@ -30,10 +32,14 @@ function PetCard({ name, image, id, location, userId }: PetProps) {
     navigate("/reported-pets");
   }
 
+  function handleShowModalForm() {
+    showModal == false ? setShowModal(true) : setShowModal(false);
+  }
+
   function ReportPetComp() {
     return (
       <a
-        // onClick={}
+        onClick={handleShowModalForm}
         className={css.report__link}
         aria-label="Botón para reportar una mascota perdida"
       >
@@ -84,6 +90,7 @@ function PetCard({ name, image, id, location, userId }: PetProps) {
           {userId ? <EditPetComp /> : <ReportPetComp />}
         </div>
       </div>
+      {showModal ? <ModalForm /> : null}
     </article>
   );
 }

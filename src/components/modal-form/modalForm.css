@@ -1,16 +1,28 @@
-.root{
-  width:316px;
+.root {
+  width: 316px;
   height: 80vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
   position: fixed;
+  top: 100px;
+  left: 30px;
   border-radius: 10px;
-  background: #5bd8e9;
+  background: var(--menu-bgc);
+  z-index: 1;
 }
 
-.icon{
+@media (min-width: 769px) {
+  .root {
+    width: 355px;
+    position: fixed;
+    top: 190px;
+    left: 480px;
+  }
+}
+
+.icon {
   width: 25px;
   height: 25px;
   position: absolute;
@@ -18,13 +30,13 @@
   right: 0px;
 }
 
-.title__container{
+.title__container {
   height: 100px;
   width: 100%;
   max-width: 335px;
   padding: 5px 10px;
 }
 
-.form{
+.form {
   width: 300px;
 }

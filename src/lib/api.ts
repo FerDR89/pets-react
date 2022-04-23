@@ -51,42 +51,99 @@ async function fetchSetUserData(password, fullname, email) {
     password,
   };
 
-  console.log({ userData });
-
-  fetch(API_BASE_URL + "/auth", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(userData),
-  });
+  try {
+    fetch(API_BASE_URL + "/auth", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    });
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 async function fetchUpdateUserData(
   token,
   userData: { fullname?: string; password?: string }
 ) {
-  const response = await fetch(API_BASE_URL + "/my-profile", {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: "bearer " + token,
-    },
-    body: JSON.stringify(userData),
-  });
-  const result = await response.json();
-  return result;
+  try {
+    const respuesta = await fetch(API_BASE_URL + "/my-profile", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "bearer " + token,
+      },
+      body: JSON.stringify(userData),
+    });
+    const result = await respuesta.json();
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 async function fetchMyPets(token) {
-  const response = await fetch(API_BASE_URL + "/get-my-pets", {
+  const respuesta = await fetch(API_BASE_URL + "/get-my-pets", {
     method: "GET",
     headers: {
       Authorization: "bearer " + token,
     },
   });
-  const result = await response.json();
+  const result = await respuesta.json();
   return result;
+}
+
+async function fetchCreatePet(token: string, petData: object) {
+  console.log("Desde el fecth", petData);
+  try {
+    const respuesta = await fetch(API_BASE_URL + "/post-pet", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "bearer " + token,
+      },
+      body: JSON.stringify(petData),
+    });
+    const result = await respuesta.json();
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function fetchUpdatePet(token: string, petData: object) {
+  try {
+    const respuesta = await fetch(API_BASE_URL + "/update-pet", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "bearer " + token,
+      },
+      body: JSON.stringify(petData),
+    });
+    const result = await respuesta.json();
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function fetchDeletePet(token: string, pet_id: number) {
+  try {
+    const respuesta = await fetch(API_BASE_URL + "/delete-pet/" + pet_id, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "bearer " + token,
+      },
+    });
+    const result = await respuesta.json();
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export {
@@ -96,4 +153,7 @@ export {
   fetchSetUserData,
   fetchUpdateUserData,
   fetchMyPets,
+  fetchCreatePet,
+  fetchUpdatePet,
+  fetchDeletePet,
 };

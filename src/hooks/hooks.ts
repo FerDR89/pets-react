@@ -33,6 +33,10 @@ function useSetUser() {
   return useRecoilState(userState);
 }
 
+function useUser() {
+  return useRecoilValue(userState);
+}
+
 function useMyPets() {
   return useRecoilValue(getMyPets);
 }
@@ -50,6 +54,7 @@ export {
   useSetGuessCords,
   usePetsArounds,
   useSetUser,
+  useUser,
   useMyPets,
   useSetPet,
   usePet,
