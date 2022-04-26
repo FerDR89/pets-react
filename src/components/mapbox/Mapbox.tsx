@@ -28,7 +28,6 @@ export function Mapbox() {
     const data = await fetch(
       `https://us1.locationiq.com/v1/search.php?key=pk.bf4604bc2b3ea328e732de26a4387fa9&q=${query}&format=json`
     ).then((r) => r.json());
-    console.log(data);
     const lat = parseFloat(data[0].lat);
     const lng = parseFloat(data[0].lon);
     const newCoords = [lng, lat];

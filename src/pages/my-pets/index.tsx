@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import css from "pages/pets-around/index.css";
 import { useMyPets } from "hooks/hooks";
 import { PetCard } from "components/pet-card/PetCard";
@@ -6,6 +6,7 @@ import { Text } from "ui/text/Text";
 
 const MyPets = () => {
   const arrayPets = useMyPets();
+
   return (
     <article className={css.root}>
       <div className={css.title__container}>

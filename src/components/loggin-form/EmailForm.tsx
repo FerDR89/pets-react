@@ -16,7 +16,6 @@ function EmailForm() {
     const email = e.target.email.value;
     if (email) {
       const data = await fetchUserId(email);
-      console.log({ data });
       setUser({
         ...user,
         userEmail: email,

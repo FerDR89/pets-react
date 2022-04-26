@@ -1,4 +1,5 @@
 const API_BASE_URL = "https://dwf-m7.herokuapp.com";
+import { checkPetData } from "lib/auxFunction";
 
 async function fetchPetsAround(coords) {
   try {
@@ -96,7 +97,6 @@ async function fetchMyPets(token) {
 }
 
 async function fetchCreatePet(token: string, petData: object) {
-  console.log("Desde el fecth", petData);
   try {
     const respuesta = await fetch(API_BASE_URL + "/post-pet", {
       method: "POST",
@@ -113,10 +113,13 @@ async function fetchCreatePet(token: string, petData: object) {
   }
 }
 
-async function fetchUpdatePet(token: string, petData: object) {
+async function fetchUpdatePet(token: string, data: object) {
+  //REVISAR PORQUE NO FUNCIONA
+  const petData = await checkPetData(data);
+
   try {
     const respuesta = await fetch(API_BASE_URL + "/update-pet", {
-      method: "PUT",
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
         Authorization: "bearer " + token,
@@ -124,6 +127,7 @@ async function fetchUpdatePet(token: string, petData: object) {
       body: JSON.stringify(petData),
     });
     const result = await respuesta.json();
+    console.log({ result });
     return result;
   } catch (error) {
     console.log(error);
@@ -145,6 +149,23 @@ async function fetchDeletePet(token: string, pet_id: number) {
     console.log(error);
   }
 }
+async function fetchGuessData(data) {
+  try {
+    const respuesta = await fetch(API_BASE_URL + "/report-pet", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    const result = await respuesta.json();
+    console.log(result);
+
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 export {
   fetchPetsAround,
@@ -156,4 +177,5 @@ export {
   fetchCreatePet,
   fetchUpdatePet,
   fetchDeletePet,
+  fetchGuessData,
 };

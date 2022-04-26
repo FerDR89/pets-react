@@ -17,8 +17,6 @@ export function ReportedPets() {
   const token = user["token"];
   const navigate = useNavigate();
 
-  console.log(pet);
-
   function handleCancelClick() {
     navigate("/my-pets");
   }
@@ -30,7 +28,7 @@ export function ReportedPets() {
         pet_id: petId,
       };
       fetchUpdatePet(token, petData).then((res) => {
-        if (res.updatePet == true) {
+        if (res["updatePet"] == true) {
           alert("Su mascota fue reportada con éxito");
         } else {
           alert(

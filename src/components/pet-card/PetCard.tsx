@@ -90,7 +90,17 @@ function PetCard({ name, image, id, location, userId }: PetProps) {
           {userId ? <EditPetComp /> : <ReportPetComp />}
         </div>
       </div>
-      {showModal ? <ModalForm /> : null}
+      {showModal ? (
+        <ModalForm
+          id={id}
+          name={name}
+          closeModal={(modal) => {
+            if (modal == true) {
+              setShowModal(false);
+            }
+          }}
+        />
+      ) : null}
     </article>
   );
 }
