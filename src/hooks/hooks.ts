@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   guessCoords,
   getPetsAround,
@@ -6,7 +6,11 @@ import {
   getMyPets,
   petState,
 } from "hooks/atom";
-import { useRecoilState, useRecoilValue } from "recoil";
+import {
+  useRecoilState,
+  useRecoilValue,
+  useRecoilRefresher_UNSTABLE,
+} from "recoil";
 
 function useChangeNavColor() {
   const [navOption, setNavOption] = useState(false);
@@ -41,6 +45,10 @@ function useMyPets() {
   return useRecoilValue(getMyPets);
 }
 
+function useRefreshMyPets() {
+  return useRecoilRefresher_UNSTABLE(getMyPets);
+}
+
 function useSetPet() {
   return useRecoilState(petState);
 }
@@ -58,4 +66,5 @@ export {
   useMyPets,
   useSetPet,
   usePet,
+  useRefreshMyPets,
 };

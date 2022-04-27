@@ -6,7 +6,6 @@ import { Text } from "ui/text/Text";
 
 const MyPets = () => {
   const arrayPets = useMyPets();
-
   return (
     <article className={css.root}>
       <div className={css.title__container}>

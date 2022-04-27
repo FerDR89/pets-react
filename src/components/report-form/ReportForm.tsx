@@ -1,6 +1,6 @@
 import React from "react";
 import css from "components/report-form/reportForm.css";
-import { usePet, useUser } from "hooks/hooks";
+import { usePet, useUser, useRefreshMyPets } from "hooks/hooks";
 import { fetchCreatePet, fetchUpdatePet } from "lib/api";
 import { Text } from "ui/text/Text";
 import { TextField } from "ui/text-field/TextField";
@@ -15,6 +15,7 @@ type ReportFormProps = {
 
 export function ReportForm({ petName }: ReportFormProps) {
   const navigate = useNavigate();
+  const refresh = useRefreshMyPets();
   const user = useUser();
   const token = user["token"];
   const pet = usePet();
@@ -37,8 +38,9 @@ export function ReportForm({ petName }: ReportFormProps) {
 
       fetchCreatePet(token, petData).then((res) => {
         if (res.newPet == true && res.updateUser == true) {
-          navigate("/my-pets");
           alert("Su mascota fue reportada con éxito");
+          refresh();
+          navigate("/my-pets");
         } else {
           alert(
             "Hubo un problema con la carga de su mascota, por favor intente más tarde"
@@ -57,6 +59,8 @@ export function ReportForm({ petName }: ReportFormProps) {
       fetchUpdatePet(token, petData).then((res) => {
         if (res["updatePet"] == true) {
           alert("Su mascota fue reportada con éxito");
+          refresh();
+          navigate("/my-pets");
         } else {
           alert(
             "Hubo un problema con la carga de su mascota, por favor intente más tarde"

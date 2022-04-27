@@ -20,7 +20,7 @@ export function Mapbox() {
   const [pet, setPet] = useSetPet();
   const [query, setQuery] = useState("");
   // lo seteo any porque la prop "center" de Map se queja
-  const initialCoords: any = [-0.481747846041145, 51.3233379650232];
+  const initialCoords: any = [-58.5281796989036, -34.5674023];
   const [coords, setCoords] = useState(initialCoords);
 
   async function search() {
@@ -28,6 +28,8 @@ export function Mapbox() {
     const data = await fetch(
       `https://us1.locationiq.com/v1/search.php?key=pk.bf4604bc2b3ea328e732de26a4387fa9&q=${query}&format=json`
     ).then((r) => r.json());
+    console.log(data);
+
     const lat = parseFloat(data[0].lat);
     const lng = parseFloat(data[0].lon);
     const newCoords = [lng, lat];

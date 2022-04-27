@@ -53,13 +53,15 @@ async function fetchSetUserData(password, fullname, email) {
   };
 
   try {
-    fetch(API_BASE_URL + "/auth", {
+    const response = await fetch(API_BASE_URL + "/auth", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(userData),
     });
+    const result = await response.json();
+    return result;
   } catch (error) {
     console.log(error);
   }
@@ -79,6 +81,8 @@ async function fetchUpdateUserData(
       body: JSON.stringify(userData),
     });
     const result = await respuesta.json();
+    console.log({ result });
+
     return result;
   } catch (error) {
     console.log(error);
