@@ -33,6 +33,7 @@ function BurgerMenu() {
   }
 
   function handleCloseSesionClick() {
+    localStorage.clear();
     setUser({});
     navigate("/");
   }
@@ -44,6 +45,26 @@ function BurgerMenu() {
   }
 
   const navOption = useChangeNavColor();
+
+  function closeSessionComp(userEmail) {
+    return (
+      <div className={css["close-session__container"]}>
+        <Text tag="text-body" fsize="18px">
+          ${userEmail}
+        </Text>
+        <a
+          aria-label="Cerrar sesión"
+          className={css.close__link}
+          onClick={() => {
+            handleMenuClick();
+            handleCloseSesionClick();
+          }}
+        >
+          CERRAR SESIÓN
+        </a>
+      </div>
+    );
+  }
 
   return (
     <article className={css.root}>
@@ -106,21 +127,7 @@ function BurgerMenu() {
               </a>
             </li>
           </ul>
-          <div className={css["close-session__container"]}>
-            <Text tag="text-body" fsize="18px">
-              {userEmail || ""}
-            </Text>
-            <a
-              aria-label="Cerrar sesión"
-              className={css.close__link}
-              onClick={() => {
-                handleMenuClick();
-                handleCloseSesionClick();
-              }}
-            >
-              CERRAR SESIÓN
-            </a>
-          </div>
+          {userEmail ? closeSessionComp(userEmail) : null}
         </div>
       </nav>
     </article>

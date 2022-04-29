@@ -11,6 +11,7 @@ function PassForm() {
   const navigate = useNavigate();
   const [user, setUser] = useSetUser();
   const email = user["userEmail"];
+  const name = user["userName"];
   const path = user["path"];
 
   const handleSubmit = async (e) => {
@@ -18,8 +19,16 @@ function PassForm() {
     const password = e.target.password.value;
     if (password) {
       const token = await fetchUserToken(email, password);
-      setUser({ ...user, token });
-      token ? navigate(path) : alert("Contraseña incorrecta");
+      if (token) {
+        setUser({ ...user, token });
+        localStorage.setItem(
+          "user",
+          `{userName:${name}, userEmail:${email}, token:${token}}`
+        );
+        navigate(path);
+      } else {
+        alert("Contraseña incorrecta");
+      }
     }
   };
 

@@ -46,7 +46,7 @@ function DataForm() {
           fetchSetUserData(validPass, userName, userEmail).then((res) => {
             if (res["newUserId"]) {
               redirectAndResetState();
-              alert("Su usuario a sido creado con éxito");
+              alert("Su usuario ha sido creado con éxito");
             } else {
               alert(res["message"]);
             }

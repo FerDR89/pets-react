@@ -13,9 +13,10 @@ type PetProps = {
   location: string;
   id: number;
   userId?: number;
+  found_it: boolean;
 };
 
-function PetCard({ name, image, id, location, userId }: PetProps) {
+function PetCard({ name, image, id, location, userId, found_it }: PetProps) {
   const navigate = useNavigate();
   const [pet, setPet] = useSetPet();
   const [showModal, setShowModal] = useState(false);
@@ -68,8 +69,13 @@ function PetCard({ name, image, id, location, userId }: PetProps) {
   }
 
   return (
-    <article className={css.root}>
-      <div className={css.image__container}>
+    //Si found_it es true me agrega la clase root, un espacio vacio para separa las clases y la clase con el modificador correspondiente al condiconal aplicado.
+    <article
+      className={
+        found_it ? css.root + " " + css["root__shadow-green"] : css.root
+      }
+    >
+      <div className={(css.image__container, css.root)}>
         <img
           arial-label={`Imagen de la mascota perdida: ${name}`}
           src={image}

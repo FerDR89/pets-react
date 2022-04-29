@@ -2,13 +2,14 @@ import React from "react";
 import css from "pages/reported-pets/index.css";
 import { useNavigate } from "react-router-dom";
 import { ReportForm } from "components/report-form/ReportForm";
-import { usePet, useUser } from "hooks/hooks";
+import { usePet, useUser, useRefreshMyPets } from "hooks/hooks";
 import { fetchUpdatePet, fetchDeletePet } from "lib/api";
 
 import { Text } from "ui/text/Text";
 import { MyButton } from "ui/my-button/MyButton";
 
 export function ReportedPets() {
+  const refresh = useRefreshMyPets();
   const pet = usePet();
   const petName = pet["petName"];
   const petId = pet["petId"];
@@ -29,6 +30,8 @@ export function ReportedPets() {
       };
       fetchUpdatePet(token, petData).then((res) => {
         if (res["updatePet"] == true) {
+          refresh();
+          navigate("/my-pets");
           alert("Su mascota fue reportada con éxito");
         } else {
           alert(
@@ -43,8 +46,9 @@ export function ReportedPets() {
     if (token && petId) {
       fetchDeletePet(token, petId).then((res) => {
         if (res.deletedPet == true) {
-          alert("Su mascota fue eliminada con éxito");
+          refresh();
           navigate("/my-pets");
+          alert("Su mascota fue eliminada con éxito");
         } else {
           alert(
             "Hubo un problema con la carga de su mascota, por favor intente más tarde"
