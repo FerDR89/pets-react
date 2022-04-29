@@ -22,6 +22,7 @@ const PetsAround = () => {
                 id={pet.id}
                 image={pet.imgURL}
                 location={pet.place_lost}
+                found_it={pet.found_it}
               />
             );
           })
