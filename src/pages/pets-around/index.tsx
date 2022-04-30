@@ -7,6 +7,8 @@ import pet from "assets/mockPet.jpg";
 
 const PetsAround = () => {
   const petsArray = usePetsArounds();
+  console.log({ petsArray });
+
   return (
     <article className={css.root}>
       <div className={css.title__container}>

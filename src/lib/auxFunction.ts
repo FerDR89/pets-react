@@ -19,6 +19,10 @@ export function checkPetData(data) {
     petData["pet_id"] = data.id;
   }
 
+  if (data.found_it) {
+    petData["found_it"] = data.found_it;
+  }
+
   console.log("petData desde la funcion que chequea", petData);
 
   return petData;

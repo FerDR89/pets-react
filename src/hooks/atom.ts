@@ -17,9 +17,19 @@ export const getPetsAround = selector({
   },
 });
 
+const localStorageEffect =
+  (key) =>
+  ({ setSelf }) => {
+    const savedValue = localStorage.getItem(key);
+    if (savedValue != null) {
+      setSelf(JSON.parse(savedValue));
+    }
+  };
+
 export const userState = atom({
   key: "user",
   default: {},
+  effects: [localStorageEffect("user")],
 });
 
 export const getMyPets = selector({

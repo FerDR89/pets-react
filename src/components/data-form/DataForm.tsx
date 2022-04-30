@@ -27,6 +27,7 @@ function DataForm() {
   }
 
   function redirectAndResetState() {
+    localStorage.clear();
     setUser({ path: "/my-dates" });
     navigate("/login");
   }
@@ -37,39 +38,37 @@ function DataForm() {
     const password = e.target.password.value;
     const repeatPassword = e.target.repeatPassword.value;
     const userData = { fullname: userName };
-    const validPass = checkPassword(password, repeatPassword);
 
     if (password && repeatPassword) {
+      const validPass = checkPassword(password, repeatPassword);
       userData["password"] = validPass.toString();
-      if (!token) {
-        if (validPass) {
-          fetchSetUserData(validPass, userName, userEmail).then((res) => {
-            if (res["newUserId"]) {
-              redirectAndResetState();
-              alert("Su usuario ha sido creado con éxito");
-            } else {
-              alert(res["message"]);
-            }
-          });
-        }
-      } else {
-        if (validPass) {
-          fetchUpdateUserData(token, userData).then((res) => {
-            if (res["updateUser"] == true && res["updateAuth"] == true) {
-              redirectAndResetState();
-              alert(
-                "Su nombre de usuario y contraseña fueron actualizados con éxito"
-              );
-            } else if (res["updateAuth"] == true) {
-              redirectAndResetState();
-              alert("Su contraseña ha sido actualizada con éxito ");
-            } else {
-              alert("Error, intentelo nuevamente más tarde");
-            }
-          });
-        }
+      if (!token && validPass) {
+        fetchSetUserData(validPass, userName, userEmail).then((res) => {
+          if (res["newUserId"]) {
+            redirectAndResetState();
+            alert("Su usuario ha sido creado con éxito");
+          } else {
+            alert(res["message"]);
+          }
+        });
+      }
+      if (token && validPass) {
+        fetchUpdateUserData(token, userData).then((res) => {
+          if (res["updateUser"] == true && res["updateAuth"] == true) {
+            redirectAndResetState();
+            alert(
+              "Su nombre de usuario y contraseña fueron actualizados con éxito"
+            );
+          } else if (res["updateAuth"] == true) {
+            redirectAndResetState();
+            alert("Su contraseña ha sido actualizada con éxito ");
+          } else {
+            alert("Error, intentelo nuevamente más tarde");
+          }
+        });
       }
     } else {
+      console.log("Tercer IF", token);
       fetchUpdateUserData(token, userData).then((res) => {
         if (res["updateUser"] == true) {
           redirectAndResetState();

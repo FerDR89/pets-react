@@ -21,10 +21,12 @@ function PassForm() {
       const token = await fetchUserToken(email, password);
       if (token) {
         setUser({ ...user, token });
-        localStorage.setItem(
-          "user",
-          `{userName:${name}, userEmail:${email}, token:${token}}`
-        );
+        const stringify = JSON.stringify({
+          userName: name,
+          userEmail: email,
+          token: token,
+        });
+        localStorage.setItem("user", `${stringify}`);
         navigate(path);
       } else {
         alert("Contraseña incorrecta");

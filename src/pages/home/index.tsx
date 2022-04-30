@@ -7,23 +7,7 @@ import { MyButton } from "ui/my-button/MyButton";
 
 const Home = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useSetUser();
   const [coords, setNewCoords] = useSetGuessCords();
-
-  (function checkLocalStorage() {
-    const data = localStorage.getItem("user");
-    const localData = JSON.parse(data);
-    if (localData == null) {
-      return;
-    } else {
-      setUser({
-        ...user,
-        token: localData["token"],
-        userEmail: localData["userEmail"],
-        userName: localData["userName"],
-      });
-    }
-  })();
 
   const handleClick = () => {
     navigator.geolocation.getCurrentPosition((position) => {

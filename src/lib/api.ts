@@ -118,9 +118,7 @@ async function fetchCreatePet(token: string, petData: object) {
 }
 
 async function fetchUpdatePet(token: string, data: object) {
-  //REVISAR PORQUE NO FUNCIONA
   const petData = await checkPetData(data);
-
   try {
     const respuesta = await fetch(API_BASE_URL + "/update-pet", {
       method: "PATCH",

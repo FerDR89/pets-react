@@ -50,7 +50,7 @@ function BurgerMenu() {
     return (
       <div className={css["close-session__container"]}>
         <Text tag="text-body" fsize="18px">
-          ${userEmail}
+          {userEmail}
         </Text>
         <a
           aria-label="Cerrar sesión"

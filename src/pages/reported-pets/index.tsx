@@ -26,8 +26,9 @@ export function ReportedPets() {
     if (token && petId) {
       const petData = {
         found_it: true,
-        pet_id: petId,
+        id: petId,
       };
+
       fetchUpdatePet(token, petData).then((res) => {
         if (res["updatePet"] == true) {
           refresh();
